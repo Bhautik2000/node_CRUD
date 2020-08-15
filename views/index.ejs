@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title><%= title %></title>
+  </head>
+  <body>
+
+    <div class="container my-3">
+
+      <% if (success !=''){%>
+        <% if (success == 'Record Delete Successfully') { %>
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>DELETE:</strong> <%= success %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+        <% } %>
+        <% if (success == 'Record Update Successfully') { %>
+
+          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>UPDATE:</strong> <%= success %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+        <% } %>
+        <% if (success == 'Record Insert Successfully') { %>
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>SUCCESS:</strong> <%= success %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+        <% } %>
+      <% } %>
+
+    </div>
+
+    <div class="container my-3">
+      <div class="hading">
+        <h3>
+          Filter Record form database
+        </h3>
+      </div>
+      <form action="/filter" method="POST">
+        <div class="row">
+          <div class="col-4">
+            <input type="text" class="form-control" placeholder=" BY Name" name="name">
+          </div>
+          <div class="col-4">
+            <input type="email" class="form-control" placeholder="BY Email" name="email">
+          </div>
+          <div class="col-2">
+            <input type="submit" type="button" class="btn btn-info" value="Submit">
+          </div>
+        </div>
+      </form>
+      <hr>
+      <div class="container">
+        <a href="/uplodeImg" class="btn btn-outline-success btn-xs">UPLODE IMAGES</a>
+      </div>
+      <hr>
+    </div>
+    
+    <div class="container my-4">
+        <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">EmpType</th>
+                <th scope="col">HourlyRate</th>
+                <th scope="col">Total hr</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (records.length > 0) { %>
+                <% records.forEach(function(row) { %>
+              <tr>
+                <td><%= row.name %></td>
+                <td><%= row.email %></td>
+                <td><%= row.etype %></td>
+                <td><%= row.hourlyrate %></td>
+                <td><%= row.totalHour%></td> 
+                <td><a href="/edit/<%= row._id %>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <a href="/delete/<%= row._id %>" class="btn btn-danger btn-xs"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td> 
+              </tr>
+
+                <% })} else { %>
+                  <tr>
+                    <td colspan="6">
+                      NO RECORD FOUND
+                    </td>
+                  </tr>
+                  <% } %>
+             
+            </tbody>
+          </table>
+    </div>
+      <div class="container">
+
+        <div class="row">
+          <div class="col-6 offset-3">
+        <div class="card text-white bg-dark mb-3" >
+          <div class="card-header">Enter Employee Detailes</div>
+        </div>
+      </div>
+      </div>
+
+        <form  action="/employee" method="POST">
+          <div class="row">
+            <div class="col-6 offset-3 my-3" >
+              <input type="text" class="form-control" name="name" placeholder="name" required>
+            </div>
+            <div class="col-6 offset-3 my-3" >
+              <input type="email" class="form-control" name="email" placeholder="emial" required>
+            </div>
+            <div class="col-6 offset-3 my-3" >
+              <input type="text" class="form-control" name="EmpType" placeholder="EmpType" required>
+            </div>
+            <div class="col-6 offset-3 my-3" >
+              <input type="text" class="form-control" name="hourlyrate" placeholder="hourlyrate" required>
+            </div>
+            <div class="col-6 offset-3 my-3" >
+              <input type="text" class="form-control" name="totalHr" placeholder="totalHr" required>
+            </div>
+            <br>
+          </div>
+          <div class="col-2 offset-5 my-3">
+            <input type="submit" type="button" class="btn btn-info" value="Submit">
+          </div>
+        </form>
+
+      </div>
+            
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>

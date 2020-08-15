@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title><%= title %></title>
+</head>
+
+<body>
+
+    <div class="container my-3">
+
+        <% if (success !=''){%>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>SUCCESS:</strong> <%= success %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <% } %>
+
+    </div>
+
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="form">
+                    <div class="alert alert-primary" role="alert">
+                      Uplode Your File
+                    </div>
+                <form action="/uplodeImg" method="POST" enctype="multipart/form-data">
+
+                    <strong>Uplode IMG</strong> : <input type="file" id="myFile" name="imgFile">
+                    <hr>
+                    <input type="submit" type="button" class="btn btn-info" value="Uplode">
+
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-4 offset-4">
+                <hr>
+                <h4>Gallery</h4>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="container my-3">
+        <div class="row">
+            <% if (records.length > 0) { %>
+                <% records.forEach(function(row) { %>
+                    <div class="card col-md-4" style="width: 18rem;">
+                        <img src="./uploads/<%= row.imagename %>" class="card-img-top img-fluid" alt="images" style="padding: 11px;">
+                    </div> 
+                <% }) } %>
+        </div>
+    </div>
+
+ 
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
